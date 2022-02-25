@@ -1,3 +1,4 @@
+ᴅᴀʀᴍᴀɴ ᴅᴊ:
 from bs4 import BeautifulSoup
 import urllib
 import glob
@@ -53,11 +54,11 @@ async def _(event):
             title = gresults["titles"][i]
             link = gresults["links"][i]
             desc = gresults["descriptions"][i]
-            msg += f"❍[{title}]({link})\n**{desc}**\n\n"
+            msg += f"❍[{title}]({link})\n{desc}\n\n"
         except IndexError:
             break
     await webevent.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+        "Search Query:\n" + match + "\n\nResults:\n" + msg, link_preview=False
     )
 
 
@@ -102,15 +103,15 @@ async def okgoogle(img):
         photo = io.BytesIO()
         await tbot.download_media(message, photo)
     else:
-        await img.reply("`Reply to photo or sticker nigger.`")
+        await img.reply("Reply to photo or sticker nigger.")
         return
 
     if photo:
-        dev = await img.reply("`Processing...`")
+        dev = await img.reply("Processing...")
         try:
             image = Image.open(photo)
         except OSError:
-            await dev.edit("`Unsupported sexuality, most likely.`")
+            await dev.edit("Unsupported sexuality, most likely.")
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
@@ -121,13 +122,13 @@ async def okgoogle(img):
         response = requests.post(searchUrl, files=multipart, allow_redirects=False)
         fetchUrl = response.headers["Location"]
 
-        if response != 400:
+if response != 400:
             await dev.edit(
-                "`Image successfully uploaded to Google. Maybe.`"
-                "\n`Parsing source now. Maybe.`"
+                "Image successfully uploaded to Google. Maybe."
+                "\nParsing source now. Maybe."
             )
         else:
-            await dev.edit("`Google told me to fuck off.`")
+            await dev.edit("Google told me to fuck off.")
             return
 
         os.remove(name)
@@ -136,9 +137,9 @@ async def okgoogle(img):
         imgspage = match["similar_images"]
 
         if guess and imgspage:
-            await dev.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
+            await dev.edit(f"[{guess}]({fetchUrl})\n\nLooking for this Image...")
         else:
-            await dev.edit("`Can't find this piece of shit.`")
+            await dev.edit("Can't find this piece of shit.")
             return
 
         if img.pattern_match.group(1):
@@ -247,7 +248,8 @@ async def apk(e):
             .findNext("div", "uzcko")
             .img["data-src"]
         )
-        app_details = "<a href='" + app_icon + "'>📲&#8203;</a>"
+
+app_details = "<a href='" + app_icon + "'>📲&#8203;</a>"
         app_details += " <b>" + app_name + "</b>"
         app_details += (
             "\n\n<code>Developer :</code> <a href='"
@@ -268,26 +270,26 @@ async def apk(e):
             + app_link
             + "'>View in Play Store</a>"
         )
-        app_details += "\n\n===> Emiko <==="
+        app_details += "\n\n===> Osmani <==="
         await e.reply(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
-        await e.reply("No result found in search. Please enter **Valid app name**")
+        await e.reply("No result found in search. Please enter Valid app name")
     except Exception as err:
         await e.reply("Exception Occured:- " + str(err))
 
 
-__mod_name__ = "Search"
+mod_name = "Search"
 
-__help__ = """
+help = """
 ❂ /google <query>*:* Perform a google search
-❂ /image <query>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: `/img hello lim=10`
+❂ /image <query>*:* Search Google for images and returns them\nFor greater no. of results specify lim, For eg: /img hello lim=10
 ❂ /app <appname>*:* Searches for an app in Play Store and returns its details.
 ❂ /reverse: Does a reverse image search of the media which it was replied to.
 ❂ /gps <location>*:* Get gps location.
 ❂ /github <username>*:* Get information about a GitHub user.
 ❂ /country <country name>*:* Gathering info about given country
 ❂ /imdb <Movie name>*:* Get full info about a movie with imdb.com
-❂ Emiko <query>*:* Emiko answers the query
+❂ Osmani <query>*:* Osmani answers the query
 
-  💡Ex: `Emiko where is Japan?`
+  💡Ex: Osmani where is Somalia?
 """
